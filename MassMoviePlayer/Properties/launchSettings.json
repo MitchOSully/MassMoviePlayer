@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MassMoviePlayer (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MassMoviePlayer (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
