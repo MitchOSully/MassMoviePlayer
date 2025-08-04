@@ -14,6 +14,18 @@
     </Window.SystemBackdrop>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <!-- Title Bar -->
+            <RowDefinition Height="Auto"/>
+            <!-- App Content -->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <TitleBar x:Name="AppTitleBar"
+                  Title="Mass Movie Player">
+            <TitleBar.IconSource>
+                <FontIconSource Glyph="&#xF4AA;"/>
+            </TitleBar.IconSource>
+        </TitleBar>
     </Grid>
 </Window>

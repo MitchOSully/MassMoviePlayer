@@ -26,6 +26,9 @@ namespace MassMoviePlayer
         public MainWindow()
         {
             InitializeComponent();
+
+            ExtendsContentIntoTitleBar = true; // Hide the default system title bar and extend our XAML code in to that area
+            SetTitleBar(AppTitleBar); // Treat our 'AppTitleBar' component as the new Titlebar
         }
     }
 }
