@@ -35,8 +35,11 @@ namespace MassMoviePlayer
         {
             try
             {
-                StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Vids/Balcony.mp4"));
-                MediaPlayer.Source = MediaSource.CreateFromStorageFile(file);
+                StorageFile file1 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Vids/Balcony.mp4"));
+                MediaPlayer1.Source = MediaSource.CreateFromStorageFile(file1);
+
+                StorageFile file2 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Vids/FF1Trailer.mp4"));
+                MediaPlayer2.Source = MediaSource.CreateFromStorageFile(file2);
             }
             catch (Exception ex)
             {
