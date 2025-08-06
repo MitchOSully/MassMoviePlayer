@@ -35,15 +35,36 @@ namespace MassMoviePlayer
         {
             try
             {
-                StorageFile file1 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Vids/Balcony.mp4"));
+                StorageFile file1 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Vids/FF1Trailer.mp4"));
                 MediaPlayer1.Source = MediaSource.CreateFromStorageFile(file1);
 
-                StorageFile file2 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Vids/FF1Trailer.mp4"));
+                StorageFile file2 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Vids/FF2Trailer.mp4"));
                 MediaPlayer2.Source = MediaSource.CreateFromStorageFile(file2);
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private async void AddVideoClick(object sender, RoutedEventArgs e)
+        {
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.VideosLibrary;
+            picker.FileTypeFilter.Add(".mp4");
+            picker.FileTypeFilter.Add(".wmv");
+            picker.FileTypeFilter.Add(".avi");
+
+            IntPtr hwnd = System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle;
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
+
+            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+            if (file != null)
+            {
+                // Application now has read/write access to the picked file
+                StorageFile file2 = await StorageFile.GetFileFromPathAsync(file.Path);
+                MediaPlayer2.Source = MediaSource.CreateFromStorageFile(file2);
             }
         }
     }

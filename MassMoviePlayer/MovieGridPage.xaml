@@ -9,19 +9,36 @@
     mc:Ignorable="d">
 
     <Grid Padding="16" RowSpacing="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
+
+        <CommandBar DefaultLabelPosition="Right"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    >
+            <AppBarButton Icon="Add"
+                          LabelPosition="Collapsed"
+                          Click="AddVideoClick"/>
+        </CommandBar>
+
         <MediaPlayerElement x:Name="MediaPlayer1"
                             AutoPlay="False"
                             AreTransportControlsEnabled="True"
+                            Grid.Row="1"
                             Grid.Column="0"
                             />
         <MediaPlayerElement x:Name="MediaPlayer2"
                             AutoPlay="False"
                             AreTransportControlsEnabled="True"
+                            Grid.Row="1"
                             Grid.Column="1"
                             />
     </Grid>
