@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MassMoviePlayer"
+    xmlns:models="using:MassMoviePlayer.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -14,32 +15,34 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
         <CommandBar DefaultLabelPosition="Right"
                     Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
                     >
             <AppBarButton Icon="Add"
                           LabelPosition="Collapsed"
-                          Click="AddVideoClick"/>
+                          Click="AddVideoClick"
+                          />
         </CommandBar>
 
-        <MediaPlayerElement x:Name="MediaPlayer1"
-                            AutoPlay="False"
-                            AreTransportControlsEnabled="True"
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            />
-        <MediaPlayerElement x:Name="MediaPlayer2"
-                            AutoPlay="False"
-                            AreTransportControlsEnabled="True"
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            />
+        <ItemsView ItemsSource="{x:Bind videoList }"
+                   Grid.Row="1"
+                   >
+            <ItemsView.Layout>
+                <UniformGridLayout Orientation="Vertical"
+                                   MinItemWidth="400"
+                                   MinItemHeight="224"/> <!-- 16:9 ratio -->
+            </ItemsView.Layout>
+            <ItemsView.ItemTemplate>
+                <DataTemplate x:DataType="models:Video">
+                    <ItemContainer>
+                        <MediaPlayerElement Source="{x:Bind source}"
+                                            AreTransportControlsEnabled="True"
+                                            AutoPlay="False"
+                                            Stretch="UniformToFill"
+                                            />
+                    </ItemContainer>
+                </DataTemplate>
+            </ItemsView.ItemTemplate>
+        </ItemsView>
     </Grid>
 </Page>

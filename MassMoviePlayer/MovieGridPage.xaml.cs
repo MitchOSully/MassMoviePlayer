@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -20,11 +21,10 @@ using Windows.Storage;
 
 namespace MassMoviePlayer
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MovieGridPage : Page
     {
+        public ObservableCollection<Models.Video> videoList { get; set; } = new ObservableCollection<Models.Video>();
+
         public MovieGridPage()
         {
             InitializeComponent();
@@ -35,11 +35,11 @@ namespace MassMoviePlayer
         {
             try
             {
-                StorageFile file1 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Vids/FF1Trailer.mp4"));
-                MediaPlayer1.Source = MediaSource.CreateFromStorageFile(file1);
-
-                StorageFile file2 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Vids/FF2Trailer.mp4"));
-                MediaPlayer2.Source = MediaSource.CreateFromStorageFile(file2);
+                Models.Video? vid = await Models.Video.CreateVideo(new Uri("ms-appx:///Assets/Vids/FF1Trailer.mp4"));
+                if (vid != null)
+                {
+                    videoList.Add(vid);
+                }
             }
             catch (Exception ex)
             {
@@ -63,8 +63,7 @@ namespace MassMoviePlayer
             if (file != null)
             {
                 // Application now has read/write access to the picked file
-                StorageFile file2 = await StorageFile.GetFileFromPathAsync(file.Path);
-                MediaPlayer2.Source = MediaSource.CreateFromStorageFile(file2);
+                videoList.Add(new Models.Video(MediaSource.CreateFromStorageFile(file)));
             }
         }
     }
