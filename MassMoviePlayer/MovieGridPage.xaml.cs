@@ -29,6 +29,7 @@ namespace MassMoviePlayer
         {
             InitializeComponent();
             LoadVideo();
+            RefreshGridLayout();
         }
 
         private async void LoadVideo()
@@ -65,6 +66,15 @@ namespace MassMoviePlayer
                 // Application now has read/write access to the picked file
                 videoList.Add(new Models.Video(MediaSource.CreateFromStorageFile(file)));
             }
+        }
+
+        private void RefreshGridLayout()
+        {
+            const float aspectRatio = 16f / 9f; // 16:9 aspect ratio
+
+            videoGridLayout.MaximumRowsOrColumns = 4;
+            videoGridLayout.MinItemWidth = 400;
+            videoGridLayout.MinItemHeight = videoGridLayout.MinItemWidth / aspectRatio;
         }
     }
 }

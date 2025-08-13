@@ -28,9 +28,12 @@
                    Grid.Row="1"
                    >
             <ItemsView.Layout>
-                <UniformGridLayout Orientation="Vertical"
-                                   MinItemWidth="400"
-                                   MinItemHeight="224"/> <!-- 16:9 ratio -->
+                <UniformGridLayout x:Name="videoGridLayout"
+                                   Orientation="Horizontal"
+                                   ItemsJustification="Center"
+                                   MinRowSpacing="5"
+                                   MinColumnSpacing="5"
+                                   />
             </ItemsView.Layout>
             <ItemsView.ItemTemplate>
                 <DataTemplate x:DataType="models:Video">
